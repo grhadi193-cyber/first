@@ -3,6 +3,17 @@ import { mockAdvisors, mockStudents } from '../utils/mockData'
 
 const AuthContext = createContext(null)
 
+// Default admin credentials
+const defaultAdmin = {
+  id: 'admin_1',
+  username: 'admin',
+  password: 'admin123',
+  name: 'مدیر سیستم',
+  role: 'admin',
+  email: 'admin@university.edu',
+  phone: '021-12345678'
+}
+
 export const useAuth = () => {
   const context = useContext(AuthContext)
   if (!context) {
@@ -24,7 +35,14 @@ export const AuthProvider = ({ children }) => {
   const login = (username, password, role) => {
     let foundUser = null
 
-    if (role === 'advisor') {
+    // Check admin credentials
+    if (role === 'admin') {
+      if (username === defaultAdmin.username && password === defaultAdmin.password) {
+        foundUser = defaultAdmin
+      }
+    }
+    // Check advisor credentials
+    else if (role === 'advisor') {
       foundUser = mockAdvisors.find(
         adv => adv.username === username && adv.password === password
       )
@@ -36,7 +54,9 @@ export const AuthProvider = ({ children }) => {
           foundUser.availability = JSON.parse(savedAvailability)
         }
       }
-    } else {
+    }
+    // Check student credentials
+    else {
       foundUser = mockStudents.find(
         std => std.username === username && std.password === password
       )

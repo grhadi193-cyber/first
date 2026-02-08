@@ -12,6 +12,13 @@ import Appointment from './components/Student/Appointment'
 import SessionEntry from './components/Shared/SessionEntry'
 import PrivateRoute from './components/Shared/PrivateRoute'
 
+// Admin Components
+import AdminDashboard from './components/Admin/AdminDashboard'
+import UserManagement from './components/Admin/UserManagement'
+import StudentImport from './components/Admin/StudentImport'
+import AdvisorPerformance from './components/Admin/AdvisorPerformance'
+import Reports from './components/Admin/Reports'
+
 function App() {
   return (
     <AuthProvider>
@@ -20,6 +27,72 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
             
+            {/* Admin Routes */}
+            <Route 
+              path="/admin/dashboard" 
+              element={
+                <PrivateRoute role="admin">
+                  <AdminDashboard />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/admin/users" 
+              element={
+                <PrivateRoute role="admin">
+                  <UserManagement />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/admin/import" 
+              element={
+                <PrivateRoute role="admin">
+                  <StudentImport />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/admin/advisor-performance" 
+              element={
+                <PrivateRoute role="admin">
+                  <AdvisorPerformance />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/admin/appointments" 
+              element={
+                <PrivateRoute role="admin">
+                  <AdminDashboard />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/admin/sessions" 
+              element={
+                <PrivateRoute role="admin">
+                  <AdminDashboard />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/admin/reports" 
+              element={
+                <PrivateRoute role="admin">
+                  <Reports />
+                </PrivateRoute>
+              } 
+            />
+            <Route 
+              path="/admin/advisor/:advisorId" 
+              element={
+                <PrivateRoute role="admin">
+                  <AdvisorPerformance />
+                </PrivateRoute>
+              } 
+            />
+
             {/* Advisor Routes */}
             <Route 
               path="/advisor/dashboard" 
